@@ -206,6 +206,7 @@ impl GeyserPlugin for Plugin {
                     unreachable!("ReplicaAccountInfoVersions::V0_0_1 is not supported")
                 }
                 ReplicaTransactionInfoVersions::V0_0_2(info) => info,
+                ReplicaTransactionInfoVersions::V0_0_3(_) => unimplemented!(),
             };
 
             let message = Message::Transaction(MessageTransaction::from_geyser(transaction, slot));
