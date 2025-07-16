@@ -201,16 +201,20 @@ impl GeyserPlugin for Plugin {
         slot: u64,
     ) -> PluginResult<()> {
         self.with_inner(|inner| {
-            let transaction = match transaction {
+            match transaction {
                 ReplicaTransactionInfoVersions::V0_0_1(_info) => {
                     unreachable!("ReplicaAccountInfoVersions::V0_0_1 is not supported")
                 }
-                ReplicaTransactionInfoVersions::V0_0_2(info) => info,
-                ReplicaTransactionInfoVersions::V0_0_3(_) => unimplemented!(),
-            };
-
-            let message = Message::Transaction(MessageTransaction::from_geyser(transaction, slot));
-            inner.send_message(message);
+                ReplicaTransactionInfoVersions::V0_0_2(info) => {
+                    let message = Message::Transaction(MessageTransaction::from_geyser(info, slot));
+                    inner.send_message(message);
+                }
+                ReplicaTransactionInfoVersions::V0_0_3(info) => {
+                    let message =
+                        Message::Transaction(MessageTransaction::from_geyser_v3(info, slot));
+                    inner.send_message(message);
+                }
+            }
 
             Ok(())
         })

@@ -47,12 +47,13 @@ pub mod convert_to {
         solana_clock::UnixTimestamp,
         solana_message::{
             compiled_instruction::CompiledInstruction,
-            v0::{LoadedMessage, MessageAddressTableLookup},
-            LegacyMessage, MessageHeader, SanitizedMessage,
+            legacy,
+            v0::{self, LoadedMessage, MessageAddressTableLookup},
+            LegacyMessage, MessageHeader, SanitizedMessage, VersionedMessage,
         },
         solana_pubkey::Pubkey,
         solana_signature::Signature,
-        solana_transaction::sanitized::SanitizedTransaction,
+        solana_transaction::{sanitized::SanitizedTransaction, versioned::VersionedTransaction},
         solana_transaction_context::TransactionReturnData,
         solana_transaction_error::TransactionError,
         solana_transaction_status::{
@@ -69,6 +70,17 @@ pub mod convert_to {
                 .map(|signature| <Signature as AsRef<[u8]>>::as_ref(signature).into())
                 .collect(),
             message: Some(create_message(tx.message())),
+        }
+    }
+
+    pub fn create_versioned_transaction(tx: &VersionedTransaction) -> proto::Transaction {
+        proto::Transaction {
+            signatures: tx
+                .signatures
+                .iter()
+                .map(|signature| <Signature as AsRef<[u8]>>::as_ref(signature).into())
+                .collect(),
+            message: Some(create_versioned_message(&tx.message)),
         }
     }
 
@@ -89,6 +101,38 @@ pub mod convert_to {
                 instructions: create_instructions(&message.instructions),
                 versioned: true,
                 address_table_lookups: create_lookups(&message.address_table_lookups),
+            },
+        }
+    }
+
+    pub fn create_versioned_message(message: &VersionedMessage) -> proto::Message {
+        match message {
+            VersionedMessage::Legacy(legacy::Message {
+                header,
+                account_keys,
+                recent_blockhash,
+                instructions,
+            }) => proto::Message {
+                header: Some(create_header(header)),
+                account_keys: create_pubkeys(account_keys),
+                recent_blockhash: recent_blockhash.to_bytes().into(),
+                instructions: create_instructions(instructions),
+                versioned: false,
+                address_table_lookups: vec![],
+            },
+            VersionedMessage::V0(v0::Message {
+                header,
+                account_keys,
+                recent_blockhash,
+                instructions,
+                address_table_lookups,
+            }) => proto::Message {
+                header: Some(create_header(header)),
+                account_keys: create_pubkeys(account_keys),
+                recent_blockhash: recent_blockhash.to_bytes().into(),
+                instructions: create_instructions(instructions),
+                versioned: true,
+                address_table_lookups: create_lookups(address_table_lookups),
             },
         }
     }
@@ -147,8 +191,9 @@ pub mod convert_to {
             rewards,
             loaded_addresses,
             return_data,
-            compute_units_consumed, 
-            cost_units } = meta;
+            compute_units_consumed,
+            cost_units,
+        } = meta;
         let err = create_transaction_error(status);
         let inner_instructions_none = inner_instructions.is_none();
         let inner_instructions = inner_instructions
