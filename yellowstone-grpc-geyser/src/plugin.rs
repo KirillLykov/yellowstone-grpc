@@ -12,8 +12,8 @@ use {
     std::{
         concat, env,
         sync::{
-            atomic::{AtomicBool, Ordering},
             Arc, Mutex,
+            atomic::{AtomicBool, Ordering},
         },
         time::Duration,
     },
@@ -303,7 +303,7 @@ impl GeyserPlugin for Plugin {
     }
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 #[allow(improper_ctypes_definitions)]
 /// # Safety
 ///

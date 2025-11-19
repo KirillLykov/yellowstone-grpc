@@ -21,7 +21,7 @@ publish = false
 
 [workspace.dependencies]
 affinity = "0.1.2"
-agave-geyser-plugin-interface = { path = "../solana/geyser-plugin-interface" }
+agave-geyser-plugin-interface = { git = "https://github.com/anza-xyz/agave.git", rev = "7d7973" }
 anyhow = "1.0.98"
 backoff = "0.4.0"
 base64 = "0.22.1"
@@ -56,20 +56,21 @@ protobuf-src = "1.1.0"
 serde = "1.0.145"
 serde_json = "1.0.86"
 solana-account = { version = "3.2.0" }
-solana-account-decoder = { version = "3.0.10" }
+solana-account-decoder = { git = "https://github.com/anza-xyz/agave.git", rev = "7d7973" }
 solana-clock = { version = "3.0.0", default-features = false }
 solana-hash = { version = "4.0.1" }
 solana-keypair = { version = "3.1.0" }
-solana-logger = { package = "agave-logger", path = "../solana/logger" }
+# 7d7973 is commit hash for solana master as of 2025-11-19, version 4.0
+solana-logger = { package = "agave-logger", git = "https://github.com/anza-xyz/agave.git", rev = "7d7973", features = ["agave-unstable-api"] }
 solana-message = { version = "3.0.1", features = ["bincode", "blake3"] }
 solana-pubkey = { version = "4.0.0" }
 solana-signature = { version = "3.1.0" }
 solana-signer = { version = "3.0.0" }
-solana-storage-proto = { path = "../solana/storage-proto" }
-solana-transaction = { version = "3.0.2" }
-solana-transaction-context = { path = "../solana/transaction-context" }
+solana-storage-proto = { git = "https://github.com/anza-xyz/agave.git", rev = "7d7973", features = ["agave-unstable-api"]}
+solana-transaction = { version = "3.0.1" }
+solana-transaction-context = { git = "https://github.com/anza-xyz/agave.git", rev = "7d7973" }
 solana-transaction-error = { version = "3.0.0" }
-solana-transaction-status = { path = "../solana/transaction-status" }
+solana-transaction-status = { git = "https://github.com/anza-xyz/agave.git", rev = "7d7973" }
 smallvec = "1.15.1"
 spl-token-2022-interface = "2.1.0"
 thiserror = "2.0.16"
