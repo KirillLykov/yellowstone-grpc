@@ -801,11 +801,12 @@ async fn geyser_subscribe(
                         );
                     }
                     Some(UpdateOneof::Transaction(msg)) => {
-                        let tx = msg
+                        let tx: SubscribeUpdateTransactionInfo = msg
                             .transaction
                             .ok_or(anyhow::anyhow!("no transaction in the message"))?;
                         let mut value = create_pretty_transaction(tx)?;
                         value["slot"] = json!(msg.slot);
+                        println!("Filter: {:?}", filters);
                         print_update("transaction", created_at, &filters, value);
                     }
                     Some(UpdateOneof::TransactionStatus(msg)) => {

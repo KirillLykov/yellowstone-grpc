@@ -1,5 +1,5 @@
 {
-  "libpath": "../target/release/libyellowstone_grpc_geyser.so",
+  "libpath": "/home/klykov/wrks_ext/yellowstone-grpc/target/release/libyellowstone_grpc_geyser.so",
   "log": {
     "level": "info"
   },
@@ -25,7 +25,7 @@
     "unary_concurrency_limit": 100,
     "unary_disabled": false,
     "x_token": null,
-    "replay_stored_slots": 0,
+    "replay_stored_slots": 4096,
     "filter_name_size_limit": 128,
     "filter_names_size_limit": 4096,
     "filter_names_cleanup_interval": "1s",
