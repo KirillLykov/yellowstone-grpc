@@ -577,6 +577,7 @@ pub mod convert_from {
                         .map_err(|_| "failed to parse reward commission")?,
                 )
             },
+            commission_bps: None,
         })
     }
 
