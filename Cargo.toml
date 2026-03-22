@@ -21,7 +21,7 @@ publish = false
 
 [workspace.dependencies]
 affinity = "0.1.2"
-agave-geyser-plugin-interface = { git = "https://github.com/anza-xyz/agave.git", rev = "1088d29ee4da0f04df71cb8f286667693412e43f" }
+agave-geyser-plugin-interface = { version = "4.0.0-beta.3"  }
 anyhow = "1.0.98"
 backoff = "0.4.0"
 base64 = "0.22.1"
@@ -55,22 +55,22 @@ prost_011 = { package = "prost", version = "0.11.9" }
 protobuf-src = "1.1.0"
 serde = "1.0.145"
 serde_json = "1.0.86"
-solana-account = { version = "3.2.0" }
-solana-account-decoder = { git = "https://github.com/anza-xyz/agave.git", rev = "1088d29ee4da0f04df71cb8f286667693412e43f" }
-solana-clock = { version = "3.0.0", default-features = false }
-solana-hash = { version = "3.0.0" }
+solana-account = { version = "3.4.0" }
+solana-account-decoder = { version = "4.0.0-beta.3"}
+solana-clock = { version = "3.0.1", default-features = false }
+solana-hash = { version = "4.2.0" }
 solana-keypair = { version = "3.0.1" }
 # 1088d29ee4da0f04df71cb8f286667693412e43f is commit hash for solana master as of 2025-11-19, version 4.0
-solana-logger = { package = "agave-logger", git = "https://github.com/anza-xyz/agave.git", rev = "1088d29ee4da0f04df71cb8f286667693412e43f", features = ["agave-unstable-api"] }
-solana-message = { version = "3.0.1", features = ["bincode", "blake3"] }
+solana-logger = { package = "agave-logger", version = "4.0.0-beta.3", features = ["agave-unstable-api"] }
+solana-message = { version = "3.1.0", features = ["blake3"] }
 solana-pubkey = { version = "3.0.0" }
-solana-signature = { version = "3.1.0" }
+solana-signature = { version = "3.3.0" }
 solana-signer = { version = "3.0.0" }
-solana-storage-proto = { git = "https://github.com/anza-xyz/agave.git", rev = "1088d29ee4da0f04df71cb8f286667693412e43f", features = ["agave-unstable-api"]}
-solana-transaction = { version = "=3.0.2" }
-solana-transaction-context = { git = "https://github.com/anza-xyz/agave.git", rev = "1088d29ee4da0f04df71cb8f286667693412e43f" }
+solana-storage-proto = { version = "4.0.0-beta.3", features = ["agave-unstable-api"]}
+solana-transaction = { version = "3.1.0" }
+solana-transaction-context = { version = "4.0.0-beta.3" }
 solana-transaction-error = { version = "3.0.0" }
-solana-transaction-status = { git = "https://github.com/anza-xyz/agave.git", rev = "1088d29ee4da0f04df71cb8f286667693412e43f" }
+solana-transaction-status = { version = "4.0.0-beta.3" }
 smallvec = "1.15.1"
 spl-token-2022-interface = "2.1.0"
 thiserror = "2.0.16"

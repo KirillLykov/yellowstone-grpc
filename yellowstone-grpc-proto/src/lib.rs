@@ -52,7 +52,7 @@ pub mod convert_to {
         solana_pubkey::Pubkey,
         solana_signature::Signature,
         solana_transaction::versioned::VersionedTransaction,
-        solana_transaction_context::TransactionReturnData,
+        solana_transaction_context::transaction::TransactionReturnData,
         solana_transaction_error::TransactionError,
         solana_transaction_status::{
             InnerInstruction, InnerInstructions, Reward, RewardType, TransactionStatusMeta,
@@ -312,7 +312,7 @@ pub mod convert_from {
         solana_pubkey::Pubkey,
         solana_signature::Signature,
         solana_transaction::versioned::VersionedTransaction,
-        solana_transaction_context::TransactionReturnData,
+        solana_transaction_context::transaction::TransactionReturnData,
         solana_transaction_error::TransactionError,
         solana_transaction_status::{
             ConfirmedBlock, InnerInstruction, InnerInstructions, Reward, RewardType,
